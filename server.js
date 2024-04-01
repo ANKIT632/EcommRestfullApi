@@ -8,7 +8,12 @@ const bcrypt = require('bcryptjs');
 const app = express();
 
 
+// middleware convert json to js object.
+app.use(express.json());
+
+
 async function init() {
+
     // create admin
     const user = await user_model.findOne({ userId: "admin" });
 
@@ -38,8 +43,13 @@ async function init() {
         console.log("while creating admin : ", err);
     }
 
-
 }
+
+// calling route and pass the app object.
+
+require('./routes/auth.route.js')(app);
+require('./routes/category.route.js')(app);
+  
 
 
 mongoose.connect(db_config.DB_URL).then(() => {
