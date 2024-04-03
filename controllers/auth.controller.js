@@ -45,6 +45,8 @@ exports.signin = async (req, res) => {
     }
 
     // Password is  correct or not.
+    // Note here not require the salt in compareSync method because automatically add in hash password it is extract from hash password.
+    
     const isPasswordValid = bcrypt.compareSync(password, user.password);
 
     if (!isPasswordValid) {
