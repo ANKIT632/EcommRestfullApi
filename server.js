@@ -49,6 +49,8 @@ async function init() {
 
 require('./routes/auth.route.js')(app);
 require('./routes/category.route.js')(app);
+require('./routes/product.route.js')(app);
+require('./routes/cart.route.js')(app);
   
 
 

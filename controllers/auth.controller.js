@@ -55,7 +55,7 @@ exports.signin = async (req, res) => {
 
     // using jwt we will create the access token with a given TTL(time to live) and return
     // 120 sec. pass payload,key,time
-    const token = jwt.sign({ id: user.userId }, secret.sercetKey, { expiresIn: 240 });
+    const token = jwt.sign({ id: user.userId }, secret.sercetKey, { expiresIn: 1040 });
 
 
     res.status(200).send(

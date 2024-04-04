@@ -90,6 +90,17 @@ const verifyToken = (req, res, next) => {
 }
 
 
+// validate product data.
+const validateProduct=(req,res,next)=>{
+  const {productName,price,description}=req.body;
+
+  if(!productName || !price || !description){
+    return res.status(400).send("failed ! all field mendotory ")
+  }
+  next();
+}
+
+
 // check for only add item admin.
 const checkIsAdmin=(req,res,next)=>{
   const user=req.user;
@@ -107,12 +118,25 @@ const checkIsAdmin=(req,res,next)=>{
 }
 
 
+const validateCart=(req,res,next)=>{
+  
+    if(req.productCount===0){
+      return res.status(200).send({mess:"Cart count is empty"});
+    }
+
+    next();
+}
+
+
+
 
 module.exports = {
   verifySignUpBody,
   verifySignInBody,
   verifyToken,
-  checkIsAdmin
+  checkIsAdmin,
+  validateProduct,
+  validateCart,
 }
 
 
