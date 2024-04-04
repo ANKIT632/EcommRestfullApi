@@ -46,3 +46,23 @@ exports.createNewCart = async (req, res) => {
 
 
 }
+
+exports.getAllCart=async(req,res)=>{
+
+    try{
+        const userId=req.params.userId; 
+
+        const allCart=await cart_model.find({createdBy:userId}).populate("createdBy",'-password','email').populate("productId");
+
+        if(!allCart){
+            return res.status(200).send({message:"Cart is Empty buy Now"});
+        }
+        
+        return res.status(200).send(allCart);
+
+    }
+    catch(err){
+      return res.status(500).send({message:"Error while cart fetch.."})
+    }
+
+}
